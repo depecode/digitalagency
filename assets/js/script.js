@@ -15,9 +15,9 @@ const addEventOnElem = (elem, type, callback) => {
 /**
  * Navbar toggle
  */
-const navbar    = document.querySelector('[data-navbar]');
+const navbar     = document.querySelector('[data-navbar]');
 const navToggler = document.querySelector('[data-nav-toggler]');
-const navLinks  = document.querySelectorAll('[data-nav-link]');
+const navLinks   = document.querySelectorAll('[data-nav-link]');
 
 const openNavbar  = () => { navbar?.classList.add('active');    navToggler?.classList.add('active'); };
 const closeNavbar = () => { navbar?.classList.remove('active'); navToggler?.classList.remove('active'); };
@@ -48,10 +48,30 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 /**
+ * Theme toggle — light (default) / dark
+ */
+const themeToggleBtn = document.querySelector('[data-theme-toggle]');
+const htmlEl = document.documentElement;
+
+// Read saved preference; default to 'light'
+const savedTheme = localStorage.getItem('theme') || 'light';
+htmlEl.setAttribute('data-theme', savedTheme);
+
+const applyTheme = (theme) => {
+  htmlEl.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+};
+
+themeToggleBtn?.addEventListener('click', () => {
+  const current = htmlEl.getAttribute('data-theme');
+  applyTheme(current === 'dark' ? 'light' : 'dark');
+});
+
+/**
  * Scroll-reveal: fade cards up when they enter the viewport
  */
 const revealTargets = document.querySelectorAll(
-  '.service-card, .project-card, .contact-card, .about-stat, .about-item'
+  '.service-card, .project-card, .contact-card, .about-stat, .about-item, .client-card'
 );
 
 if ('IntersectionObserver' in window && revealTargets.length) {
@@ -68,4 +88,12 @@ if ('IntersectionObserver' in window && revealTargets.length) {
     el.style.opacity = '0';
     revealObserver.observe(el);
   });
+}
+
+/**
+ * Footer year
+ */
+const yearSpan = document.getElementById('year');
+if (yearSpan) {
+  yearSpan.textContent = new Date().getFullYear();
 }
