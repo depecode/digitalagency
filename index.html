@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
   <meta charset="UTF-8">
@@ -14,170 +14,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <style>
-    /* ── CLIENT LOGOS SECTION ── */
-    .clients { background: var(--clr-surface); }
-
-    .clients-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 24px;
-      margin-block-start: 0;
-    }
-
-    .client-card {
-      background: var(--clr-card);
-      border: 1px solid var(--clr-border);
-      border-radius: var(--radius-md);
-      padding: 36px 28px 28px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      text-align: center;
-      transition: var(--transition-2);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .client-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--gradient-h);
-      opacity: 0;
-      transition: var(--transition-2);
-    }
-
-    .client-card:is(:hover, :focus-within) {
-      transform: translateY(-8px);
-      border-color: hsla(42, 80%, 62%, 0.28);
-      box-shadow: var(--shadow-card);
-    }
-
-    .client-card:is(:hover, :focus-within)::before { opacity: 1; }
-
-    .client-logo-wrap {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: var(--clr-white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      flex-shrink: 0;
-      border: 2px solid var(--clr-border);
-    }
-
-    .client-logo-wrap img {
-      width: 60%;
-      height: 60%;
-      object-fit: contain;
-    }
-
-    /* Monogram placeholder for clients without a logo file */
-    .client-monogram {
-      font-family: var(--ff-display);
-      font-size: 1.8rem;
-      font-weight: 900;
-      color: var(--clr-bg);
-      line-height: 1;
-    }
-
-    .client-monogram.atuche  { background: linear-gradient(135deg,#1a1a2e,#2d2d4e); color:#e8c96d; }
-    .client-monogram.borah   { background: linear-gradient(135deg,#1e0a0a,#3d1a1a); color:#e8c96d; }
-
-    .client-name {
-      font-family: var(--ff-display);
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--clr-text);
-    }
-
-    .client-desc {
-      font-size: var(--fs-6);
-      color: var(--clr-muted);
-      line-height: 1.6;
-      flex: 1;
-    }
-
-    .client-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-size: var(--fs-6);
-      font-weight: 700;
-      color: var(--clr-accent);
-      border: 1px solid hsla(42,80%,62%,0.3);
-      padding: 8px 18px;
-      border-radius: var(--radius-pill);
-      transition: var(--transition-1);
-    }
-
-    .client-link:is(:hover,:focus) {
-      background: var(--clr-accent);
-      color: var(--clr-bg);
-      border-color: var(--clr-accent);
-    }
-
-    .client-link ion-icon { font-size: 0.9rem; }
-
-    /* ── SOCIAL LINKS ROW ── */
-    .social-links {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-block-start: 24px;
-    }
-
-    .social-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: var(--fs-6);
-      font-weight: 600;
-      color: var(--clr-muted);
-      border: 1px solid var(--clr-border);
-      padding: 8px 16px;
-      border-radius: var(--radius-pill);
-      transition: var(--transition-1);
-    }
-
-    .social-btn:is(:hover,:focus) {
-      color: var(--clr-accent);
-      border-color: var(--clr-accent);
-    }
-
-    .social-btn ion-icon { font-size: 1rem; flex-shrink: 0; }
-
-    /* ── SKILLS TAGS ── */
-    .skills-wrap {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-block: 20px;
-    }
-
-    .skill-tag {
-      background: hsla(42,80%,62%,0.08);
-      border: 1px solid hsla(42,80%,62%,0.2);
-      color: var(--clr-accent);
-      font-size: var(--fs-6);
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: var(--radius-pill);
-      letter-spacing: 0.02em;
-    }
-
-    /* ── CONTACT: LinkedIn card ── */
-    .contact-item.linkedin .contact-card .card-icon ion-icon { color: #0a66c2; }
-
-    @media (min-width: 768px) {
-      .clients-grid { grid-template-columns: repeat(3, 1fr); }
-    }
-  </style>
+  <!-- Apply saved theme immediately to avoid flash -->
+  <script>
+    (function() {
+      const t = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
 </head>
 
 <body id="top">
@@ -200,10 +43,18 @@
         </ul>
       </nav>
 
-      <button class="nav-toggle-btn" aria-label="Toggle menu" data-nav-toggler>
-        <ion-icon name="menu-outline"  class="open"></ion-icon>
-        <ion-icon name="close-outline" class="close"></ion-icon>
-      </button>
+      <div style="display:flex;align-items:center;gap:10px">
+        <!-- Theme Toggle -->
+        <button class="theme-toggle-btn" aria-label="Toggle theme" data-theme-toggle>
+          <ion-icon name="moon-outline"   class="icon-moon" aria-hidden="true"></ion-icon>
+          <ion-icon name="sunny-outline"  class="icon-sun"  aria-hidden="true"></ion-icon>
+        </button>
+
+        <button class="nav-toggle-btn" aria-label="Toggle menu" data-nav-toggler>
+          <ion-icon name="menu-outline"  class="open"></ion-icon>
+          <ion-icon name="close-outline" class="close"></ion-icon>
+        </button>
+      </div>
 
     </div>
   </header>
@@ -286,7 +137,7 @@
 
             <li>
               <div class="service-card">
-                <div class="card-icon" style="background:hsla(270,70%,70%,0.12);color:hsl(270,70%,70%)">
+                <div class="card-icon" style="background:hsla(270,55%,48%,0.1);color:hsl(270,55%,48%)">
                   <ion-icon name="phone-portrait-outline"></ion-icon>
                 </div>
                 <h3 class="h3">Social Media Management</h3>
@@ -298,7 +149,7 @@
 
             <li>
               <div class="service-card">
-                <div class="card-icon" style="background:hsla(42,80%,62%,0.12);color:hsl(42,80%,62%)">
+                <div class="card-icon" style="background:hsla(32,80%,42%,0.1);color:hsl(32,80%,42%)">
                   <ion-icon name="bulb-outline"></ion-icon>
                 </div>
                 <h3 class="h3">Content Strategy &amp; Creation</h3>
@@ -310,7 +161,7 @@
 
             <li>
               <div class="service-card">
-                <div class="card-icon" style="background:hsla(42,80%,62%,0.12);color:hsl(42,80%,62%)">
+                <div class="card-icon" style="background:hsla(32,80%,42%,0.1);color:hsl(32,80%,42%)">
                   <ion-icon name="mail-outline"></ion-icon>
                 </div>
                 <h3 class="h3">Email Marketing</h3>
@@ -322,7 +173,7 @@
 
             <li>
               <div class="service-card">
-                <div class="card-icon" style="background:hsla(330,80%,65%,0.12);color:hsl(330,80%,65%)">
+                <div class="card-icon" style="background:hsla(330,70%,55%,0.1);color:hsl(330,70%,48%)">
                   <ion-icon name="megaphone-outline"></ion-icon>
                 </div>
                 <h3 class="h3">Social Media Ads</h3>
@@ -334,7 +185,7 @@
 
             <li>
               <div class="service-card">
-                <div class="card-icon" style="background:hsla(210,80%,60%,0.12);color:hsl(210,80%,65%)">
+                <div class="card-icon" style="background:hsla(210,70%,50%,0.1);color:hsl(210,70%,48%)">
                   <ion-icon name="bar-chart-outline"></ion-icon>
                 </div>
                 <h3 class="h3">Google Ads</h3>
@@ -346,7 +197,7 @@
 
             <li>
               <div class="service-card">
-                <div class="card-icon" style="background:hsla(0,80%,65%,0.12);color:hsl(0,80%,65%)">
+                <div class="card-icon" style="background:hsla(0,70%,55%,0.1);color:hsl(0,70%,48%)">
                   <ion-icon name="videocam-outline"></ion-icon>
                 </div>
                 <h3 class="h3">Phone Videography &amp; Editing</h3>
@@ -399,11 +250,12 @@
             <!-- Atuche -->
             <div class="client-card">
               <div class="client-logo-wrap" style="background:linear-gradient(135deg,#1a1a2e,#2d2d4e)">
-<img
+                <img
                   src="./assets/images/atuchewomen.PNG"
-                  alt="Stylespaceafrica logo"
-                  onerror="this.parentElement.innerHTML='<span class=\'client-monogram\' style=\'font-size:2rem;color:#111\'>SS</span>'"
-                >              </div>
+                  alt="Atuche Woman logo"
+                  onerror="this.parentElement.innerHTML='<span class=\'client-monogram atuche\' style=\'font-size:2rem\'>AW</span>'"
+                >
+              </div>
               <h3 class="client-name">Atuche Woman</h3>
               <p class="client-desc">
                 Contemporary women's fashion brand. Managed social media strategy, content creation, and growth campaigns to expand brand visibility and drive online sales.
@@ -420,7 +272,7 @@
                 <img
                   src="./assets/images/borahgeorge.PNG"
                   alt="Borah George logo"
-                  onerror="this.parentElement.innerHTML='<span class=\'client-monogram\' style=\'font-size:2rem;color:#111\'>BG</span>'"
+                  onerror="this.parentElement.innerHTML='<span class=\'client-monogram borah\' style=\'font-size:2rem\'>BG</span>'"
                 >
               </div>
               <h3 class="client-name">Borah George</h3>
@@ -642,13 +494,13 @@
   <footer class="footer">
     <div class="container">
       <span class="footer-logo">EC</span>
-   <p class="copyright">
-    &copy; 2023–<script>document.write(new Date().getFullYear())</script> 
-    All Rights Reserved — 
-    <a href="#top" class="copyright-link">Emetu Chinwekele</a>
-</p>
+      <p class="copyright">
+        &copy; 2023–<span id="year"></span>
+        All Rights Reserved —
+        <a href="#top" class="copyright-link">Emetu Chinwekele</a>
+      </p>
     </div>
-</footer>
+  </footer>
 
 
   <!-- ══ BACK TO TOP ══ -->
@@ -662,15 +514,6 @@
 
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-    const yearSpan = document.getElementById("year");
-    if (yearSpan) {
-        // .innerText or .textContent is safer than .innerHTML
-        yearSpan.textContent = new Date().getFullYear();
-    }
-});
-</script>
 
 </body>
 </html>
